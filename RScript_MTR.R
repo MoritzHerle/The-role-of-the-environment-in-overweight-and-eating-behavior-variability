@@ -1,7 +1,6 @@
 # MURCIA TWIN REGISTER 
 # EATING BEHAVIOURS AND BMI - multivairate analyses 
-# Moritz Herle, Jose Morosoli Garcia 08/01/2019
-
+# Moritz Herle, Jose Morosoli Garcia 
 
 #-------------------------------------------------------------------------------
 #---------------- MULTI ACE Model 
@@ -20,7 +19,7 @@ require(OpenMx)
 require(Hmisc)
 require(psych)
 
-setwd("R:/yourdata.dat")
+setwd("R:/XXX")
 
 ## Reading in data 
 library("foreign")
@@ -34,11 +33,6 @@ tail (data)
 
 # View (data)
 data$BMI_T2[data$BMI_T2==-9] <- NA
-data$Fatmass[data$Fatmass==-9] <- NA
-data$VisceralFat[data$VisceralFat==-9] <- NA
-
-data$Fatmass[data$Fatmass==-8] <- NA
-data$VisceralFat[data$VisceralFat==-8] <- NA
 
 describe (data)
 
@@ -48,9 +42,6 @@ data$rEOE <- residuals (lm (data$EE ~ data$Age_True, na.action="na.exclude"))
 data$rCogR <- residuals (lm (data$CR ~ data$Age_True, na.action="na.exclude"))
 data$rUncE <- residuals (lm (data$UE ~ data$Age_True, na.action="na.exclude"))
 data$rBMI_T2 <- residuals (lm (data$BMI_T2 ~ data$Age_True, na.action="na.exclude"))
-data$rFat <-residuals (lm (data$Fatmass ~data$Age_True, na.action = "na.exclude"))
-data$rVisc <- residuals (lm (data$VisceralFat ~ data$Age_True,  na.action = "na.exclude"))
-
 
 hist (data$rBMI_T2)
 summary (data)
@@ -65,16 +56,6 @@ hist (data$TrCogR )
 
 data$TrUncE <- (data$rUncE +5)*2
 hist (data$TrUncE )
-
-describe (data$rFat)
-data$TrFat <- (data$rFat +23)
-hist (data$TrFat )
-
-
-describe (data$rVisc)
-data$TrVisc <- (data$rVisc + 7)
-hist (data$TrVisc )
-
 describe (data)
 
 # create sub dataset with variables for analyses
